@@ -2,9 +2,9 @@ import 'reflect-metadata';
 export *  from './transport.event-bus.module';
 export * from './transport.event-bus.service';
 export * from './transport.event-bus.publisher';
-export * from './interfaces/transport.event.interface';
-export * from './types/transport.type';
-export * from './enums/tranport-default.enum';
-export * from './abstract/publisher.abstract';
-
-
+export * from './types/transport.event-bus.type';
+export * from './enums/transport.default-type.event-bus.enum';
+export * from './interfaces/transport.event-bus.interface';
+export * from './interfaces/transport.data.event-bus.interface';
+export * from './interfaces/transport.publisher.event-bus.interface';
+export * from './decorators/transport.type.event-bus.decorator';

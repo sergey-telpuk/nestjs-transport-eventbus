@@ -1,28 +1,26 @@
-import {DynamicModule, Global, Module} from '@nestjs/common';
-import {CqrsModule, EventBus} from '@nestjs/cqrs';
-import {TransportEventBusService} from './transport.event-bus.service';
-import {ModuleRef} from '@nestjs/core';
+import { DynamicModule, Global, Module } from '@nestjs/common';
+import { CqrsModule, EventBus } from '@nestjs/cqrs';
+import { TransportEventBusService } from './transport.event-bus.service';
+import { ModuleRef } from '@nestjs/core';
 
 @Global()
-@Module({
-    providers: [
-    ],
-    imports: [
-        CqrsModule
-    ],
-    exports: [
-
-    ],
-})
+@Module({})
 export class TransportEventBusModule {
     static forRoot(
-        publishers: any[],
+        {
+            publishers = [],
+            providers = []
+        }
     ): DynamicModule {
 
         return {
             module: TransportEventBusModule,
+            imports: [
+                CqrsModule
+            ],
             providers: [
                 ...publishers,
+                ...providers,
                 {
                     provide: TransportEventBusService,
                     useFactory: (eventBus: EventBus, moduleRef: ModuleRef) => {
@@ -37,6 +35,7 @@ export class TransportEventBusModule {
             ],
             exports: [
                 TransportEventBusService,
+                ...publishers
             ],
         };
     }

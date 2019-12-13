@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 
 @Injectable()
 export class Storage {
@@ -17,6 +17,6 @@ export class Storage {
     }
 
     clear() {
-        Storage.data = {}
+        Storage.data = {};
     }
 }

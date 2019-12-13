@@ -8,7 +8,7 @@
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "lint:fix": "tslint -p tsconfig.json -c tslint.json --fix",
-    "test:watch": "jest --watch",
+    "test:watch": "jest --watch --verbose --config ./test/jest.json",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest  --verbose  --config ./test/e2e/jest-e2e.json",
@@ -45,7 +45,9 @@
     "tsc-watch": "^4.0.0",
     "tsconfig-paths": "3.9.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.3",
+    "amqp-connection-manager": "^3.1.0",
+    "amqplib": "^0.5.5"
   },
   "jest": {
     "moduleFileExtensions": [

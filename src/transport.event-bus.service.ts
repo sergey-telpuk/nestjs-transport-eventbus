@@ -1,10 +1,8 @@
-import {EventBus, IEvent} from '@nestjs/cqrs';
-import {Injectable} from '@nestjs/common';
-import {ModuleRef} from '@nestjs/core';
-import {PublisherAbstract} from './abstract/publisher.abstract';
-import {ITransportEvent} from './interfaces/transport.event.interface';
-import {TransportType} from './types/transport.type';
-import {TransportDefault} from './enums/tranport-default.enum';
+import { EventBus, IEvent, IEventPublisher } from '@nestjs/cqrs';
+import { Injectable } from '@nestjs/common';
+import { ModuleRef } from '@nestjs/core';
+import { TransportEventBusType } from './types/transport.event-bus.type';
+import { TransportDefaultTypeEventBusEnum } from './enums/transport.default-type.event-bus.enum';
 
 @Injectable()
 export class TransportEventBusService {
@@ -23,19 +21,21 @@ export class TransportEventBusService {
     publishAll<T extends IEvent>(events: T[]): void {
         events.forEach((event: T) => {
             this.publishViaPublisher(event);
-        })
+        });
     }
 
-    private publishViaPublisher(event: ITransportEvent): void {
-        const transports: TransportType[] = event.TRANSPORTS ? event.TRANSPORTS : [];
+    private publishViaPublisher<T extends IEvent>(event: T): void {
+        const transports: TransportEventBusType[] = event.TRANSPORTS ? event.TRANSPORTS : [];
+
         delete event.TRANSPORTS;
 
-        if (transports.length === 0 || transports.includes(TransportDefault.DEF)) {
+        if (transports.length === 0 || transports.includes(TransportDefaultTypeEventBusEnum.DEF)) {
             this.eventBus.publish(event);
         }
 
         for (const publisher of this.publishers) {
-            const pub = this.moduleRef.get<PublisherAbstract>(publisher);
+
+            const pub = this.moduleRef.get<IEventPublisher>(publisher);
 
             if (transports.includes(pub.TRANSPORT)) {
                 pub.publish(event);
