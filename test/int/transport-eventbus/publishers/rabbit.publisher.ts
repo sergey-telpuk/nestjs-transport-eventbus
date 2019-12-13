@@ -14,7 +14,7 @@ export class TestClientProxy extends ClientProxy {
     }
 
     send<TResult = any, TInput = any>(pattern: any, data: TInput): Observable<any> {
-        this.storage.upsert('RabbitEvent', data.payload.message);
+        this.storage.upsert('RabbitEvent', data['payload']['message']);// tslint:disable-line
         return defer(() => Promise.resolve());
     }
 

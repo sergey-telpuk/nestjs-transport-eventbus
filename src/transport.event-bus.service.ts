@@ -25,9 +25,9 @@ export class TransportEventBusService {
     }
 
     private publishViaPublisher<T extends IEvent>(event: T): void {
-        const transports: TransportEventBusType[] = event.TRANSPORTS ? event.TRANSPORTS : [];
+        const transports: TransportEventBusType[] = event['TRANSPORTS'] ? event['TRANSPORTS'] : [];// tslint:disable-line
 
-        delete event.TRANSPORTS;
+        delete event['TRANSPORTS'];// tslint:disable-line
 
         if (transports.length === 0 || transports.includes(TransportDefaultTypeEventBusEnum.DEF)) {
             this.eventBus.publish(event);
@@ -37,7 +37,7 @@ export class TransportEventBusService {
 
             const pub = this.moduleRef.get<IEventPublisher>(publisher);
 
-            if (transports.includes(pub.TRANSPORT)) {
+            if (transports.includes(pub['TRANSPORT'])) {// tslint:disable-line
                 pub.publish(event);
             }
         }
