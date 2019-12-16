@@ -2,6 +2,8 @@ import { DynamicModule, Global, Module } from '@nestjs/common';
 import { CqrsModule, EventBus } from '@nestjs/cqrs';
 import { TransportEventBusService } from './transport.event-bus.service';
 import { ModuleRef } from '@nestjs/core';
+import { TransportEventBusPublisher } from './transport.event-bus.publisher';
+import { TRANSPORT_EVENT_BUS_PUBLISHER, TRANSPORT_EVENT_BUS_SERVICE } from './constants/transport.event-bus.constants';
 
 @Global()
 @Module({})
@@ -22,19 +24,24 @@ export class TransportEventBusModule {
                 ...publishers,
                 ...providers,
                 {
-                    provide: TransportEventBusService,
+                    provide: TRANSPORT_EVENT_BUS_PUBLISHER,
+                    useClass: TransportEventBusPublisher
+                },
+                {
+                    provide: TRANSPORT_EVENT_BUS_SERVICE,
                     useFactory: (eventBus: EventBus, moduleRef: ModuleRef) => {
                         return new TransportEventBusService(
-                            eventBus,
-                            moduleRef,
                             publishers,
+                            eventBus,
+                            moduleRef
                         );
                     },
                     inject: [EventBus, ModuleRef],
                 },
             ],
             exports: [
-                TransportEventBusService,
+                TRANSPORT_EVENT_BUS_SERVICE,
+                TRANSPORT_EVENT_BUS_PUBLISHER,
                 ...publishers
             ],
         };

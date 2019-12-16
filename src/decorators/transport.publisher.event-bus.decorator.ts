@@ -1,26 +1,27 @@
 import 'reflect-metadata';
-import { TransportEventBusType } from '../types/transport.event-bus.type';
 import { IEvent, IEventPublisher } from '@nestjs/cqrs';
-import { TRANSPORT_EVENT_BUS_PATTERN } from '../constants/transport.event-bus.constants';
+import { EVENT_NAME, TRANSPORT_EVENT_BUS_PATTERN } from '../constants/transport.event-bus.constants';
 import { ClientProxy } from '@nestjs/microservices';
 import { ITransportPublisherEventBus } from '../interfaces/transport.publisher.event-bus.interface';
 import { ITransportDataEventBus } from '../interfaces/transport.data.event-bus.interface';
 import { Logger, LoggerService } from '@nestjs/common/services/logger.service';
+import { Transport } from '@nestjs/common/enums/transport.enum';
 
-export function Publisher(TYPE: TransportEventBusType) {
+export function Publisher(TYPE: Transport) {
     return <T extends new(...args: any[]) => {}>(constructor: T) => {
-        return class extends constructor implements IEventPublisher, ITransportPublisherEventBus {
-            readonly TRANSPORT: TransportEventBusType = TYPE;
+        const name = constructor.name;
+        const object = class extends constructor implements IEventPublisher, ITransportPublisherEventBus {
+            readonly TRANSPORT: Transport = TYPE;
             readonly client: ClientProxy;
             readonly logger: LoggerService;
 
             public async publish<TPub extends IEvent>(event: TPub): Promise<void> {
                 const data: ITransportDataEventBus = {
                     payload: event,
-                    eventName: event['EVENT_NAME'],// tslint:disable-line
+                    eventName: event[EVENT_NAME],// tslint:disable-line
                 };
 
-                delete event['EVENT_NAME'];// tslint:disable-line
+                delete event[EVENT_NAME];// tslint:disable-line
 
                 this.send(data);
             }
@@ -37,5 +38,8 @@ export function Publisher(TYPE: TransportEventBusType) {
                 }
             }
         };
+
+        Object.defineProperty(object, 'name', {value: name});
+        return object;
     };
 }

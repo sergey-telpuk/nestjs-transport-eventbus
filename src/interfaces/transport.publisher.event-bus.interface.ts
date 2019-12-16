@@ -1,10 +1,7 @@
-import { ITransportDataEventBus } from './transport.data.event-bus.interface';
-import { TransportEventBusType } from '..';
 import { ClientProxy } from '@nestjs/microservices';
+import { Transport } from '@nestjs/common/enums/transport.enum';
 
 export interface ITransportPublisherEventBus {
-    readonly TRANSPORT: TransportEventBusType;
+    readonly TRANSPORT: Transport;
     readonly client: ClientProxy;
-
-    // send(data: ITransportDataEventBus): void
 }

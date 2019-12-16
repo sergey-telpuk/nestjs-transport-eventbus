@@ -1,15 +1,9 @@
 /* tslint:disable:max-classes-per-file */
 import { Transport } from '@nestjs/common/enums/transport.enum';
-import { TransportDefaultTypeEventBusEnum, TypeTransport } from '../../../../src';
+import { ExcludeDef } from '../../../../src/decorators/transport.exclude-def.decorator';
+import { TransportType } from '../../../../src/decorators/transport.type.event-bus.decorator';
 
-export class DefaultWithoutTransportEvent {
-    constructor(
-        readonly message: string
-    ) {
-    }
-}
-
-@TypeTransport(TransportDefaultTypeEventBusEnum.DEF)
+@TransportType()
 export class DefaultEvent {
     constructor(
         readonly message: string
@@ -17,7 +11,25 @@ export class DefaultEvent {
     }
 }
 
-@TypeTransport(Transport.RMQ)
+@TransportType()
+@ExcludeDef()
+export class ExcludeDefEvent {
+    constructor(
+        readonly message: string
+    ) {
+    }
+}
+
+@TransportType(Transport.RMQ)
+export class RabbitWithDefEvent {
+    constructor(
+        readonly message: string
+    ) {
+    }
+}
+
+@TransportType(Transport.RMQ)
+@ExcludeDef()
 export class RabbitEvent {
     constructor(
         readonly message: string
@@ -25,8 +37,26 @@ export class RabbitEvent {
     }
 }
 
-@TypeTransport(Transport.RMQ, TransportDefaultTypeEventBusEnum.DEF)
-export class RabbitAndDefEvent {
+@TransportType(Transport.RMQ)
+@ExcludeDef()
+export class RabbitWithoutDefEvent {
+    constructor(
+        readonly message: string
+    ) {
+    }
+}
+
+@TransportType(Transport.RMQ)
+export class SagaEvent {
+    constructor(
+        readonly message: string
+    ) {
+    }
+}
+
+
+@TransportType(Transport.RMQ)
+export class TryAggregateRootEvent {
     constructor(
         readonly message: string
     ) {

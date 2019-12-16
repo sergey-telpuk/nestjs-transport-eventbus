@@ -1,15 +1,14 @@
 import 'reflect-metadata';
 import { IEvent } from '@nestjs/cqrs';
-import { Transport } from '@nestjs/common/enums/transport.enum';
-import { EVENT_NAME, TRANSPORTS } from '../constants/transport.event-bus.constants';
+import { EXCLUDE_DEF } from '..';
 
-export function TransportType(...TYPE: Transport[]) {
+export function ExcludeDef() {
     return <T extends new(...args: any[]) => {}>(constructor: T) => {
         const name = constructor.name;
         const object = class extends constructor implements IEvent {
-            readonly [EVENT_NAME]: string = name;
-            readonly [TRANSPORTS] = TYPE;
+            readonly [EXCLUDE_DEF] = true;
         };
+
         Object.defineProperty(object, 'name', {value: name});
         return object;
     };
