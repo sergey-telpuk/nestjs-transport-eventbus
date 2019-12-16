@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { IEvent, IEventPublisher } from '@nestjs/cqrs';
-import { EVENT_NAME, TRANSPORT_EVENT_BUS_PATTERN } from '../constants/transport.event-bus.constants';
+import {EVENT_NAME, TRANSPORT, TRANSPORT_EVENT_BUS_PATTERN} from '../constants/transport.event-bus.constants';
 import { ClientProxy } from '@nestjs/microservices';
 import { ITransportPublisherEventBus } from '../interfaces/transport.publisher.event-bus.interface';
 import { ITransportDataEventBus } from '../interfaces/transport.data.event-bus.interface';
@@ -11,7 +11,7 @@ export function Publisher(TYPE: Transport) {
     return <T extends new(...args: any[]) => {}>(constructor: T) => {
         const name = constructor.name;
         const object = class extends constructor implements IEventPublisher, ITransportPublisherEventBus {
-            readonly TRANSPORT: Transport = TYPE;
+            readonly [TRANSPORT]: Transport = TYPE;
             readonly client: ClientProxy;
             readonly logger: LoggerService;
 

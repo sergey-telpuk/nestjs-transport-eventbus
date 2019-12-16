@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { IEvent } from '@nestjs/cqrs';
-import { EXCLUDE_DEF } from '..';
+import { EXCLUDE_DEF } from '../constants/transport.event-bus.constants';
 
 export function ExcludeDef() {
     return <T extends new(...args: any[]) => {}>(constructor: T) => {
