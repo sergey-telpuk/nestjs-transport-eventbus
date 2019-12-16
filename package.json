@@ -1,6 +1,6 @@
 {
   "name": "nestjs-transport-eventbus",
-  "version": "1.0.1",
+  "version": "1.0.12",
   "description": "Transport EventBus for NestJs",
   "author": "Sergey Telpuk",
   "license": "MIT",
