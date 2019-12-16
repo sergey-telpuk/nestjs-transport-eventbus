@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { IEvent, IEventPublisher } from '@nestjs/cqrs';
-import {EVENT_NAME, TRANSPORT, TRANSPORT_EVENT_BUS_PATTERN} from '../constants/transport.event-bus.constants';
+import { EVENT_NAME, TRANSPORT, TRANSPORT_EVENT_BUS_PATTERN } from '../constants/transport.event-bus.constants';
 import { ClientProxy } from '@nestjs/microservices';
 import { ITransportPublisherEventBus } from '../interfaces/transport.publisher.event-bus.interface';
 import { ITransportDataEventBus } from '../interfaces/transport.data.event-bus.interface';
