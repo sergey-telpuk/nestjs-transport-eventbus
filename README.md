@@ -1,5 +1,9 @@
 
-[![Build Status](https://travis-ci.org/sergey-telpuk/nestjs-transport-eventbus.svg?branch=master)](https://travis-ci.org/sergey-telpuk/nestjs-transport-eventbus) [![Greenkeeper badge](https://badges.greenkeeper.io/sergey-telpuk/nestjs-transport-eventbus.svg)](https://greenkeeper.io/)
+[![Build Status](https://travis-ci.org/sergey-telpuk/nestjs-transport-eventbus.svg?branch=master)](https://travis-ci.org/sergey-telpuk/nestjs-transport-eventbus) 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sergey-telpuk/nestjs-transport-eventbus.svg)](https://greenkeeper.io/)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sergey-telpuk/nestjs-transport-eventbus/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sergey-telpuk/nestjs-transport-eventbus/)
+[![codecov](https://codecov.io/gh/sergey-telpuk/nestjs-transport-eventbus/branch/master/graph/badge.svg)](https://codecov.io/gh/sergey-telpuk/nestjs-transport-eventbus)
+[![npm](https://img.shields.io/npm/dw/nestjs-transport-eventbus)](https://www.npmjs.com/package/nestjs-transport-eventbus)
 
 Transport EventBus allows to broadcast messages via variety of transports
 
