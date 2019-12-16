@@ -1,6 +1,5 @@
 import { INestApplication, Logger } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
-import { TransportEventBusService } from '../../../src/transport.event-bus.service';
 import { TransportEventBusModule } from '../../../src/transport.event-bus.module';
 import { RabbitPublisher, TestClientProxy } from './publishers/rabbit.publisher';
 import {
@@ -15,7 +14,7 @@ import { Storage } from './storage/storage';
 import { TrySagaCommandHandler } from './handlers/try.saga.command.handler';
 import { TrySagaHandler } from './handlers/try.saga.handler';
 import { TestEventService } from './service/test.service';
-import { CommandBus, CqrsModule, IEvent, IEventBus } from '@nestjs/cqrs';
+import { CommandBus, CqrsModule, IEventBus } from '@nestjs/cqrs';
 import { TryAggregateRootCommand } from './commands/try.aggregate-root.command';
 import { TryAggregateRootCommandHandler } from './handlers/try.aggregate-root.command.handler';
 import { SagaEventHandler, TryAggregateRootEventHandler } from './handlers/try.aggregate-root.event.handler';

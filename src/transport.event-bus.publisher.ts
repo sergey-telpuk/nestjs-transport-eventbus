@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { EventBus, EventPublisher, IEventBus } from '@nestjs/cqrs';
+import { EventBus, EventPublisher } from '@nestjs/cqrs';
 import { TRANSPORT_EVENT_BUS_SERVICE } from './constants/transport.event-bus.constants';
 
 @Injectable()
