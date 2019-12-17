@@ -11,3 +11,4 @@ export * from './interfaces/transport.publisher.event-bus.interface';
 export * from './decorators/transport.type.event-bus.decorator';
 export * from './decorators/transport.exclude-def.decorator';
 export * from './decorators/transport.publisher.event-bus.decorator';
+export * from './decorators/transport.event.event-bus.decarator';

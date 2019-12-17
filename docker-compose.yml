@@ -3,11 +3,27 @@ version: '3.7'
 services:
   transport-event-module:
     container_name: transport-event-module
-#    command: npm run test
+    #    command: npm run test
     command: tail -f /dev/null
     build:
       context: ./docker
       dockerfile: Dockerfile
+    ports:
+      - 3001:3001
+      - 3002:3002
+      - 3003:3003
     tty: true
     volumes:
       - .:/app
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    restart: always
+    logging:
+      driver: none
+    environment:
+      RABBITMQ_ERLANG_COOKIE: SWQOKODSQALRPCLNMEQG
+      RABBITMQ_DEFAULT_USER: rabbit
+      RABBITMQ_DEFAULT_PASS: rabbit
+    volumes:
+      - ./docker/rabbitmq/enabled_plugins:/etc/rabbitmq/enabled_plugin

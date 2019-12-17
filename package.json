@@ -5,7 +5,7 @@
   "author": "Sergey Telpuk",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && cp package.json dist/",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "lint:fix": "tslint -p tsconfig.json -c tslint.json --fix",
     "test:watch": "jest --watch --verbose --config ./test/jest.json",
