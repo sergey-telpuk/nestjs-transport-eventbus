@@ -5,8 +5,8 @@
 [![npm](https://img.shields.io/npm/dw/nestjs-transport-eventbus)](https://www.npmjs.com/package/nestjs-transport-eventbus)
 
 ## Description
-The **transport-eventbus** module for [Nest](https://github.com/nestjs/nest).
-
+The **nestjs-transport-eventbus** module for [Nest](https://github.com/nestjs/nest).\
+**nestjs-transport-eventbus** allows broadcasting events via variety of [nestjs trasports](https://docs.nestjs.com/microservices/basics) in easy way
 ## Installation
 npm i nestjs-transport-eventbus
 
@@ -27,15 +27,13 @@ import { TransportEventBusModule } from 'nestjs-transport-eventbus';
 export class AppModule {
 }
 ```
-`TransportEventBusModule` applies two arguments:
-
-`publishers` - array of transport publishers which are based on `ClientProxy`
-
+`TransportEventBusModule` applies two arguments:\
+`publishers` - array of transport publishers which are based on `ClientProxy`\
 `providers` - the additional providers for module
 
 ### Example with RabbitMQ(RabbitPublisher)
 For creating a transport publisher there is enough to implement the following steps:
-1. Implement `RabbitPublisher`, example below:
+1. Implement `RabbitPublisher`, example below:\
 ```typescript
 import { Injectable } from '@nestjs/common';
 import { ClientProxy, Transport, Client} from '@nestjs/microservices';
@@ -77,7 +75,7 @@ import { RabbitPublisher } from '...';
 export class AppModule {
 }
 ```
-3. Create an event for publisher, example below: 
+3. Create an event for publisher, example below:
 ```typescript
 import { TransportType, ExcludeDef } from 'nestjs-transport-eventbus';
 import { Transport } from '@nestjs/microservices';
@@ -163,7 +161,7 @@ export class AppService {
     this.eventBus.publish(event);
   }
 ```
-> Notice: `TRANSPORT_EVENT_BUS_PATTERN`- can pass via .env
+> Notice: `TRANSPORT_EVENT_BUS_PATTERN`- can pass via .env\
 
 
 
