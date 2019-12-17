@@ -6,5 +6,12 @@ tsconfig.json
 .prettierrc
 .idea
 tests
+test
+examples
+node_modules
 docker
 docker-compose.yml
+.travis.yml
+codecov.yml
+nest-cli.json
+tsconfig.build.json

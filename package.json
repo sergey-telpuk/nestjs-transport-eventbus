@@ -1,6 +1,6 @@
 {
   "name": "nestjs-transport-eventbus",
-  "version": "1.0.2",
+  "version": "1.0.23",
   "description": "Transport EventBus for NestJs",
   "author": "Sergey Telpuk",
   "license": "MIT",
@@ -22,21 +22,23 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@nestjs/common": "^6.10.10",
-    "@nestjs/core": "^6.10.10",
+    "@nestjs/common": "^6.10.11",
+    "@nestjs/core": "^6.10.11",
     "@nestjs/cqrs": "^6.1.0",
-    "@nestjs/microservices": "^6.10.10",
-    "@nestjs/platform-express": "^6.10.10",
+    "@nestjs/microservices": "^6.10.11",
+    "@nestjs/platform-express": "^6.10.11",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.3"
   },
   "devDependencies": {
-    "@nestjs/testing": "^6.0.0",
+    "@nestjs/testing": "^6.10.11",
     "@types/express": "^4.17.2",
     "@types/jest": "^24.0.23",
-    "@types/node": "^12.12.17",
+    "@types/node": "^12.12.19",
     "@types/supertest": "^2.0.8",
+    "amqp-connection-manager": "^3.1.0",
+    "amqplib": "^0.5.5",
     "jest": "^24.9.0",
     "prettier": "^1.19.1",
     "supertest": "4.0.2",
@@ -45,9 +47,7 @@
     "tsc-watch": "^4.0.0",
     "tsconfig-paths": "3.9.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.3",
-    "amqp-connection-manager": "^3.1.0",
-    "amqplib": "^0.5.5"
+    "typescript": "^3.7.3"
   },
   "jest": {
     "moduleFileExtensions": [
