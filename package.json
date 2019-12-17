@@ -1,6 +1,6 @@
 {
   "name": "nestjs-transport-eventbus",
-  "version": "1.0.23",
+  "version": "1.0.24",
   "description": "Transport EventBus for NestJs",
   "author": "Sergey Telpuk",
   "license": "MIT",
@@ -28,7 +28,6 @@
     "@nestjs/microservices": "^6.10.11",
     "@nestjs/platform-express": "^6.10.11",
     "reflect-metadata": "^0.1.13",
-    "rimraf": "^3.0.0",
     "rxjs": "^6.5.3"
   },
   "devDependencies": {
@@ -47,7 +46,8 @@
     "tsc-watch": "^4.0.0",
     "tsconfig-paths": "3.9.0",
     "tslint": "^5.20.1",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.3",
+    "rimraf": "^3.0.0"
   },
   "jest": {
     "moduleFileExtensions": [
