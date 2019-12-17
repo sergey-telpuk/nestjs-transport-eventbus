@@ -11,7 +11,7 @@ The **transport-eventbus** module for [Nest](https://github.com/nestjs/nest).
 npm i nestjs-transport-eventbus
 
 ## Quick Start
-Import `TransportEventBusModule` into a willing module, can look like below:
+Import `TransportEventBusModule` into a willing module, example below:
 ```typescript
 import { TransportEventBusModule } from 'nestjs-transport-eventbus';
 
@@ -35,7 +35,7 @@ export class AppModule {
 
 ### Example with RabbitMQ(RabbitPublisher)
 For creating a transport publisher there is enough to implement the following steps:
-1. Implement `RabbitPublisher`, can look like below:
+1. Implement `RabbitPublisher`, example below:
 ```typescript
 import { Injectable } from '@nestjs/common';
 import { ClientProxy, Transport, Client} from '@nestjs/microservices';
@@ -57,7 +57,7 @@ export class RabbitPublisher {
     client: ClientProxy;
 }
 ```
-2. Inject `RabbitPublisher` into `TransportEventBusModule`, can look like below:
+2. Inject `RabbitPublisher` into `TransportEventBusModule`, example below:
 ```typescript
 import { Module } from '@nestjs/common';
 import { TransportEventBusModule } from 'nestjs-transport-eventbus';
@@ -77,7 +77,7 @@ import { RabbitPublisher } from '...';
 export class AppModule {
 }
 ```
-3. Create an event for publisher, can look like below: 
+3. Create an event for publisher, example below: 
 ```typescript
 import { TransportType, ExcludeDef } from 'nestjs-transport-eventbus';
 import { Transport } from '@nestjs/microservices';
@@ -99,7 +99,7 @@ export class RabbitEvent {
 >export class RabbitEvent\
 >...
 >
-4.Inject `TRANSPORT_EVENT_BUS_SERVICE`, can look like below:
+4.Inject `TRANSPORT_EVENT_BUS_SERVICE`, example below:
 ```typescript
 import { Inject, Injectable } from '@nestjs/common';
 import { TRANSPORT_EVENT_BUS_SERVICE } from 'nestjs-transport-eventbus';
@@ -143,7 +143,7 @@ export class TryAggregateRootCommandHandler implements ICommandHandler<TryAggreg
     }
 }
 ```
-5. For Handling the event on receiving side can look like the following:
+5. For handling the broadcasted event on receiving side can look like the following:
 ```typescript
 import { Controller, Inject } from '@nestjs/common';
 import { EventPattern } from '@nestjs/microservices';
@@ -163,6 +163,7 @@ export class AppService {
     this.eventBus.publish(event);
   }
 ```
+> Notice: `TRANSPORT_EVENT_BUS_PATTERN`- can pass via .env
 
 
 
