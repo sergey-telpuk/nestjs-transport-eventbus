@@ -11,23 +11,38 @@ The **transport-eventbus** module for [Nest](https://github.com/nestjs/nest).
 npm i nestjs-transport-eventbus
 
 ## Quick Start
-Import `TransportEventBusModule` to a willing module
+Import `TransportEventBusModule` into a willing module, can look like below:
 ```typescript
- TransportEventBusModule.forRoot(
-                        {
-                            publishers: [],
-                            providers: []
-                        }
-                    )
+import { TransportEventBusModule } from 'nestjs-transport-eventbus';
+
+@Module({
+    imports: [
+        TransportEventBusModule
+    ],
+    controllers: [AppController],
+    providers: [
+        AppService
+    ],
+})
+export class AppModule {
+}
 ```
-`TransportEventBusModule` applies two arguments 
-`publishers` - Type of transport, for example, create `RabbitPublisher`
+`TransportEventBusModule` applies two arguments:
+
+`publishers` - array of transport publishers which are based on `ClientProxy`
+
+`providers` - the additional providers for module
+
+### Example with RabbitMQ(RabbitPublisher)
+For creating a transport publisher there is enough to implement the following steps:
+1. Implement `RabbitPublisher`, can look like below:
 ```typescript
 import { Injectable } from '@nestjs/common';
-import { ClientProxy, Transport} from '@nestjs/microservices';
+import { ClientProxy, Transport, Client} from '@nestjs/microservices';
+import { Publisher } from 'nestjs-transport-eventbus';
 
 @Injectable()
-@Publisher(Transport.RMQ)
+@Publisher(Transport.RMQ)//Choose the appropriate type of transport in this case `RMQ`
 export class RabbitPublisher {
    @Client({
         transport: Transport.RMQ,
@@ -42,5 +57,112 @@ export class RabbitPublisher {
     client: ClientProxy;
 }
 ```
- 
-`providers` 
+2. Inject `RabbitPublisher` into `TransportEventBusModule`, can look like below:
+```typescript
+import { Module } from '@nestjs/common';
+import { TransportEventBusModule } from 'nestjs-transport-eventbus';
+import { RabbitPublisher } from '...';
+
+@Module({
+    imports: [
+        TransportEventBusModule.forRoot({
+            publishers: [RabbitPublisher]
+        })
+    ],
+    controllers: [],
+    providers: [
+
+    ],
+})
+export class AppModule {
+}
+```
+3. Create an event for publisher, can look like below: 
+```typescript
+import { TransportType, ExcludeDef } from 'nestjs-transport-eventbus';
+import { Transport } from '@nestjs/microservices';
+
+@TransportType(Transport.RMQ)
+export class RabbitEvent {
+    constructor(
+        readonly message: string
+    ) {
+    }
+}
+```
+> Notice: By default, events are handling on both sides broadcasting server and receiving server, for changing this situation add `@ExcludeDef()` declaration,
+>can look like below:
+>\
+>....\
+>@TransportType(Transport.RMQ)\
+>@ExcludeDef()\
+>export class RabbitEvent\
+>...
+>
+4.Inject `TRANSPORT_EVENT_BUS_SERVICE`, can look like below:
+```typescript
+import { Inject, Injectable } from '@nestjs/common';
+import { TRANSPORT_EVENT_BUS_SERVICE } from 'nestjs-transport-eventbus';
+import { IEventBus } from '@nestjs/cqrs';
+import { DefaultEvent } from '...';
+import { RabbitEvent } from '...'
+@Injectable()
+export class AppService {
+  constructor(
+      @Inject(TRANSPORT_EVENT_BUS_SERVICE) private readonly eventBus: IEventBus
+  ){
+
+  }
+  rabbitEvent(): void {
+    this.eventBus.publish(new RabbitEvent('Pass some param'));
+  }
+}
+```
+> Notice: Events via [AggregateRoot](https://docs.nestjs.com/recipes/cqrs#events) 
+```typescript
+import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
+import { TryAggregateRootCommand } from '...';
+import { Inject } from '@nestjs/common';
+import { TRANSPORT_EVENT_BUS_PUBLISHER } from 'nestjs-transport-eventbus';
+import { TestModel } from '...';
+
+@CommandHandler(TryAggregateRootCommand)
+export class TryAggregateRootCommandHandler implements ICommandHandler<TryAggregateRootCommand> {
+    constructor(
+        @Inject(TRANSPORT_EVENT_BUS_PUBLISHER) private readonly publisher: EventPublisher
+    ) {
+    }
+
+    async execute(command: TryAggregateRootCommand) {
+        const {message} = command;
+        const aggregator = this.publisher.mergeObjectContext(
+            new TestModel()
+        );
+        aggregator.applyEvent(message);
+        aggregator.commit();
+    }
+}
+```
+5. For Handling the event on receiving side can look like the following:
+```typescript
+import { Controller, Inject } from '@nestjs/common';
+import { EventPattern } from '@nestjs/microservices';
+import { TRANSPORT_EVENT_BUS_PATTERN, TRANSPORT_EVENT_BUS_SERVICE, TransportEvent } from 'nestjs-transport-eventbus';
+import { IEvent, IEventBus } from '@nestjs/cqrs';
+
+@Controller()
+export class AppService {
+
+  constructor(
+      @Inject(TRANSPORT_EVENT_BUS_SERVICE) private readonly eventBus: IEventBus
+  ){
+
+  }
+  @EventPattern(TRANSPORT_EVENT_BUS_PATTERN)
+  handle(@TransportEvent() event: IEvent): void {
+    this.eventBus.publish(event);
+  }
+```
+
+
+
