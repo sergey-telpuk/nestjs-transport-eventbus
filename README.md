@@ -163,7 +163,7 @@ export class AppService {
 ```
 > Notice: `TRANSPORT_EVENT_BUS_PATTERN`- can pass via .env
 ### Examples
-[Example presented two services which communicate each other via RabbitMQ](https://github.com/sergey-telpuk/nestjs-transport-eventbus/tree/master/examples)
+[Example is presented two services which communicate each other via RabbitMQ](https://github.com/sergey-telpuk/nestjs-transport-eventbus/tree/master/examples)
 
 
 
