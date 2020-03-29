@@ -22,7 +22,7 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "dependencies": {
-    "@nestjs/common": "^6.10.11",
+    "@nestjs/common": "^7.0.7",
     "@nestjs/core": "^6.10.11",
     "@nestjs/cqrs": "^6.1.0",
     "@nestjs/microservices": "^6.10.11",
