@@ -24,7 +24,7 @@
   "dependencies": {
     "@nestjs/common": "^6.10.11",
     "@nestjs/core": "^6.10.11",
-    "@nestjs/cqrs": "^6.1.0",
+    "@nestjs/cqrs": "^7.0.0",
     "@nestjs/microservices": "^6.10.11",
     "@nestjs/platform-express": "^6.10.11",
     "reflect-metadata": "^0.1.13",
