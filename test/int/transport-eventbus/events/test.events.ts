@@ -1,5 +1,5 @@
 /* tslint:disable:max-classes-per-file */
-import { Transport } from '@nestjs/common/enums/transport.enum';
+import { Transport } from '@nestjs/microservices';
 import { ExcludeDef } from '../../../../src/decorators/transport.exclude-def.decorator';
 import { TransportType } from '../../../../src/decorators/transport.type.event-bus.decorator';
 

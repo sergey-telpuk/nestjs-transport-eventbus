@@ -1,7 +1,7 @@
 import { EventBus, EventHandlerType, IEvent, IEventBus, IEventHandler, IEventPublisher } from '@nestjs/cqrs';
 import { Injectable, Type } from '@nestjs/common';
 import { ModuleRef } from '@nestjs/core';
-import { Transport } from '@nestjs/common/enums/transport.enum';
+import { Transport } from '@nestjs/microservices';
 import { EVENT_NAME, EXCLUDE_DEF, TRANSPORT, TRANSPORTS } from './constants/transport.event-bus.constants';
 
 @Injectable()
