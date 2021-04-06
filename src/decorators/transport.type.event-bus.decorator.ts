@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 import { IEvent } from '@nestjs/cqrs';
-import { Transport } from '@nestjs/common/enums/transport.enum';
+import { Transport } from '@nestjs/microservices';
 import { EVENT_NAME, TRANSPORTS } from '../constants/transport.event-bus.constants';
 
 export function TransportType(...TYPE: Transport[]) {

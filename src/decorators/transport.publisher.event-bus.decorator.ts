@@ -5,7 +5,7 @@ import { ClientProxy } from '@nestjs/microservices';
 import { ITransportPublisherEventBus } from '../interfaces/transport.publisher.event-bus.interface';
 import { ITransportDataEventBus } from '../interfaces/transport.data.event-bus.interface';
 import { Logger, LoggerService } from '@nestjs/common/services/logger.service';
-import { Transport } from '@nestjs/common/enums/transport.enum';
+import { Transport } from '@nestjs/microservices';
 
 export function Publisher(TYPE: Transport) {
     return <T extends new(...args: any[]) => {}>(constructor: T) => {

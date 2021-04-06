@@ -1,5 +1,5 @@
 import { ClientProxy } from '@nestjs/microservices';
-import { Transport } from '@nestjs/common/enums/transport.enum';
+import { Transport } from '@nestjs/microservices';
 import { TRANSPORT } from '../constants/transport.event-bus.constants';
 
 export interface ITransportPublisherEventBus {
