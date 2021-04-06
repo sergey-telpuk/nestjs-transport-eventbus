@@ -1,4 +1,6 @@
-[![Build Status](https://travis-ci.org/sergey-telpuk/nestjs-transport-eventbus.svg?branch=master)](https://travis-ci.org/sergey-telpuk/nestjs-transport-eventbus) 
+[![Build Status](https://travis-ci.org/sergey-telpuk/nestjs-transport-eventbus.svg?branch=master)](https://travis-ci.org/sergey-telpuk/nestjs-transport-eventbus)
+[![Nest Transport CI](https://github.com/sergey-telpuk/nestjs-transport-eventbus/actions/workflows/CI.yml/badge.svg)](https://github.com/sergey-telpuk/nestjs-transport-eventbus/actions/workflows/CI.yml)
+[![Nest Transport CD](https://github.com/sergey-telpuk/nestjs-transport-eventbus/actions/workflows/CD.yml/badge.svg)](https://github.com/sergey-telpuk/nestjs-transport-eventbus/actions/workflows/CD.yml)
 [![Greenkeeper badge](https://badges.greenkeeper.io/sergey-telpuk/nestjs-transport-eventbus.svg)](https://greenkeeper.io/)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sergey-telpuk/nestjs-transport-eventbus/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sergey-telpuk/nestjs-transport-eventbus/)
 [![codecov](https://codecov.io/gh/sergey-telpuk/nestjs-transport-eventbus/branch/master/graph/badge.svg)](https://codecov.io/gh/sergey-telpuk/nestjs-transport-eventbus)
@@ -116,7 +118,7 @@ export class AppService {
   }
 }
 ```
-> Notice: Events via [AggregateRoot](https://docs.nestjs.com/recipes/cqrs#events) 
+> Notice: Events via [AggregateRoot](https://docs.nestjs.com/recipes/cqrs#events)
 ```typescript
 import { CommandHandler, EventPublisher, ICommandHandler } from '@nestjs/cqrs';
 import { TryAggregateRootCommand } from '...';
